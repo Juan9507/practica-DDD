@@ -1,10 +1,12 @@
 package co.com.sofka.example.persona;
 
 import co.com.sofka.domain.generic.AggregateEvent;
+import co.com.sofka.domain.generic.DomainEvent;
 import co.com.sofka.example.cuenta.values.CuentaId;
 import co.com.sofka.example.persona.events.*;
 import co.com.sofka.example.persona.values.*;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -51,8 +53,24 @@ public class Persona extends AggregateEvent<PersonaId> {
     /**
      * Que pasa si ya se tiene el agregado creado
      * este metodo constructor ayuda a construir la persona como tal
+     * se le pasa como parametro la personaId y una lista de domaintEvent
+     * que es una factoria que permite construir la persona
+     * List<DomainEvent> events -> lo que hace es recrear todos los agregados
+     * apartir de unos eventos que ya se tienen guardados
+     *
+     * ESTA ES LA FORMA DE OBTENER UN AGREGADO QUE YA FUE GUARDADO (PERSISTIDO)
+     * es la factoria que me ayuda a reconstruir el agregado sin tener que pasarle todos los
+     * argumentos, von esto se puede recrear el agregado en una historia en particular dependiendo
+     * de la lista de eventos de dominiio que hayan sido persistidos
      */
-    public static Persona from(PersonaId personaId)
+    public static Persona from(PersonaId personaId, List<DomainEvent> events){
+        // Se construye a traves del constructor privado
+        var persona = new Persona(personaId);
+
+        // Se recorre los eventos y se les aplica a las persona instanciada
+        events.forEach(persona::applyEvent);
+        return persona;
+    }
 
     /**
      * COMPORTAMIENTOS
