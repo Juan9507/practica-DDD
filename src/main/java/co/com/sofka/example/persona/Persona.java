@@ -129,7 +129,7 @@ public class Persona extends AggregateEvent<PersonaId> {
     /**
      * Encontrar una funcion por su id
      */
-    public Optional<Funcion> getFuncionPorId(FuncionId funcionId ){
+    protected Optional<Funcion> getFuncionPorId(FuncionId funcionId ){
         return funciones()
                 .stream()
                 .filter(funcion -> funcion.identity().equals(entityId))
