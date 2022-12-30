@@ -22,7 +22,6 @@ public class Funcion extends Entity<FuncionId> {
 
     /**
      * Comportamientos
-     * me quede en el minuto 10:20
      */
 
     public void actualizarDescripcion(Descripcion descripcion){
