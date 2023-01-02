@@ -8,7 +8,7 @@ import co.com.sofka.example.persona.values.PersonaId;
 public class ActualizarCaracteristicaDeUnaFuncion extends Command {
 
     /**
-     * Se crean los atributos que se le pasan por parametro al comportamirnto
+     * Se crean los atributos que se le pasan por parametro al comportamiento
      * principalmente se tiene que pasar el identificador del agregado
      */
     private final PersonaId personaIdM;
